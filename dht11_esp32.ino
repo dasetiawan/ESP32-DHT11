@@ -1,35 +1,34 @@
-#include <Adafruit_Sensor.h>
-#include <DHT.h>
-#define DHTPIN 4
-#define DHTTYPE DHT11
+#include <Adafruit_Sensor.h>  // add Adafruit_Sensor library
+#include <DHT.h>        // add DHT library
+#define DHTPIN 4        // define pin which is connected to DHT sensor
+#define DHTTYPE DHT11   // define type of sensor, if you're another sensor change it
 
 DHT dht(DHTPIN, DHTTYPE);
  
 void setup()
 {
 Serial.begin(115200);
-Serial.println("DHT11 sensor!");
-
 dht.begin();
 }
  
 void loop() {
-//use the functions which are supplied by library.
-float h = dht.readHumidity();
-// Read temperature as Celsius (the default)
+// read humidity as percentage and temperature as celcius
 float t = dht.readTemperature();
-// Check if any reads failed and exit early (to try again).
+float h = dht.readHumidity();
+ 
+// check if any reads failed
 if (isnan(h) || isnan(t)) {
 Serial.println("Failed to read from DHT sensor!");
 return;
 }
-// print the result to Terminal
+ 
+// print the result to serial monitor or terminal
+Serial.print("Temperature: "); 
+Serial.print(t);
+Serial.println(" *C\t");
 Serial.print("Humidity: ");
 Serial.print(h);
-Serial.print(" %\t");
-Serial.print("Temperature: ");
-Serial.print(t);
-Serial.println(" *C ");
-//we delay a little bit for next read
+Serial.print(" %");
+
 delay(2000);
 }
