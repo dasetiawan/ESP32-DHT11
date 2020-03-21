@@ -17,7 +17,7 @@ float t = dht.readTemperature();
 float h = dht.readHumidity();
  
 // check if any reads failed
-if (isnan(h) || isnan(t)) {
+if (isnan(t) || isnan(h)) {
 Serial.println("Failed to read from DHT sensor!");
 return;
 }
@@ -25,10 +25,10 @@ return;
 // print the result to serial monitor or terminal
 Serial.print("Temperature: "); 
 Serial.print(t);
-Serial.println(" *C\t");
+Serial.print(" *C\t");
 Serial.print("Humidity: ");
 Serial.print(h);
-Serial.print(" %");
+Serial.println(" %");
 
 delay(2000);
 }
