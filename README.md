@@ -6,9 +6,3 @@ This IoT project is to measure temperature and relative humidity using DHT11 sen
 2. Sensor  : DHT11
 3. Jumper Wires
 4. Project Board (Optional)
-
-# Wiring
-DHT11       ESP32
-VCC   ----  VIN (3V3)
-DATA  ----  D4
-GND   ----  GND
