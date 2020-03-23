@@ -4,32 +4,30 @@
 #define DHTTYPE DHT11
 
 DHT dht(DHTPIN, DHTTYPE);
- 
+
+float t; // variable for temperature
+float h; // variable for humidity
+
 void setup()
 {
 Serial.begin(115200);
-Serial.println("DHT11 sensor!");
-
 dht.begin();
 }
  
 void loop() {
-//use the functions which are supplied by library.
-float h = dht.readHumidity();
-// Read temperature as Celsius (the default)
-float t = dht.readTemperature();
-// Check if any reads failed and exit early (to try again).
-if (isnan(h) || isnan(t)) {
-Serial.println("Failed to read from DHT sensor!");
-return;
+ readData();
+ // print the result to Terminal
+ Serial.print("Temperature: ");
+ Serial.print(t);
+ Serial.print(" *C\t");
+ Serial.print("Humidity: ");
+ Serial.print(h);
+ Serial.println(" %");
+
+ delay(2000);
 }
-// print the result to Terminal
-Serial.print("Humidity: ");
-Serial.print(h);
-Serial.print(" %\t");
-Serial.print("Temperature: ");
-Serial.print(t);
-Serial.println(" *C ");
-//we delay a little bit for next read
-delay(2000);
+
+void readData(){
+ t = dht.readTemperature();
+ h = dht.readHumidity();
 }
